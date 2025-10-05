@@ -262,12 +262,13 @@ def generate_h_content(lines):
 
 
 # Generate large files
-os.makedirs("generated_input", exist_ok=True)
+FOLDER_NAME = "generated_input"
+os.makedirs(FOLDER_NAME, exist_ok=True)
 
 # Create multiple large .c files (50K-100K lines each)
 for i in range(50):
     lines = random.randint(50000, 100000)
-    filename = f"sample_input/large_file_{i+1}.c"
+    filename = f"{FOLDER_NAME}/large_file_{i+1}.c"
     print(f"Generating {filename} with {lines} lines...")
     with open(filename, "w") as f:
         f.write(generate_c_content(lines))
@@ -275,7 +276,7 @@ for i in range(50):
 # Create multiple large .h files (20K-50K lines each)
 for i in range(30):
     lines = random.randint(20000, 50000)
-    filename = f"sample_input/large_header_{i+1}.h"
+    filename = f"{FOLDER_NAME}/large_header_{i+1}.h"
     print(f"Generating {filename} with {lines} lines...")
     with open(filename, "w") as f:
         f.write(generate_h_content(lines))
