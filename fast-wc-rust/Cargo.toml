@@ -17,6 +17,10 @@ walkdir = "2.5.0"
 criterion = "0.7.0"
 tempfile = "3.23.0"
 
+[[bench]]
+name = "word_count_bench"
+harness = false
+
 [profile.release]
 lto = true
 codegen-units = 1
