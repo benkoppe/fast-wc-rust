@@ -3,23 +3,24 @@ if [[ -z "$1" ]]; then
   exit 1
 fi
 
+# Resolve this script's directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DIR="$1"
+
 echo "Comparing on directory: $DIR"
 
-# Example logic
 if [[ ! -d "$DIR" ]]; then
   echo "Error: $DIR is not a directory"
   exit 1
 fi
 
 echo "Compiling all..."
-cargo build --release --manifest-path ../fast-wc-rust/Cargo.toml
-../competitors/fast-cpp/compile.sh
+cargo build --release --manifest-path "$SCRIPT_DIR/../fast-wc-rust/Cargo.toml"
+"$SCRIPT_DIR/../competitors/fast-cpp/compile.sh"
 
 echo "Running all..."
-
 echo "RUST:"
-../fast-wc-rust/target/release/fast-wc-rust "$DIR"
+"$SCRIPT_DIR/../fast-wc-rust/target/release/fast-wc-rust" "$DIR"
 
 echo "C++:"
-../competitors/fast-cpp/fast-wc "$DIR"
+"$SCRIPT_DIR/../competitors/fast-cpp/fast-wc" "$DIR"
