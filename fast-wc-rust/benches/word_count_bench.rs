@@ -73,9 +73,17 @@ fn bench_word_counting(c: &mut Criterion) {
 
         create_test_files(&temp_dir, num_files, file_size);
 
+        let mut thread_counts = vec![1, 2, 4, 8];
+        let num_cpus = num_cpus::get();
+
+        if !thread_counts.contains(&num_cpus) {
+            thread_counts.push(num_cpus);
+            thread_counts.sort_unstable();
+        }
+
         // Benchmark with different configurations
-        for num_threads in [1, 2, 4, 8] {
-            if num_threads <= num_cpus::get() {
+        for num_threads in thread_counts {
+            if num_threads <= num_cpus {
                 for parallel_merge in [true, false] {
                     let merge_suffix = if parallel_merge {
                         "parallel_merge"
