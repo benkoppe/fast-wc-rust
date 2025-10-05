@@ -1,0 +1,1 @@
+{"group_id":"word_counting","function_id":"mmap_threads_4_sequential_merge","value_str":"10files_10240bytes","throughput":{"Bytes":102400},"full_id":"word_counting/mmap_threads_4_sequential_merge/10files_10240bytes","directory_name":"word_counting/mmap_threads_4_sequential_merge/10files_10240bytes","title":"word_counting/mmap_threads_4_sequential_merge/10files_10240bytes"}

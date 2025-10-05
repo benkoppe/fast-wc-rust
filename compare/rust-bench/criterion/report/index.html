@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Index - Criterion.rs</title>
+    <style type="text/css">
+        body {
+            font: 14px Helvetica Neue;
+            text-rendering: optimizelegibility;
+        }
+
+        .body {
+            width: 960px;
+            margin: auto;
+        }
+
+        a:link {
+            color: #1F78B4;
+            text-decoration: none;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 300;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        #footer {
+            height: 40px;
+            background: #888;
+            color: white;
+            font-size: larger;
+            font-weight: 300;
+        }
+
+        #footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        #footer p {
+            text-align: center
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2>Criterion.rs Benchmark Index</h2>
+        See individual benchmark pages below for more details.
+        <ul>
+            <li><a href="../rust_vs_cpp/report/index.html">rust_vs_cpp</a></li>
+            
+            <ul>
+                <li><a href="../rust_vs_cpp/cpp_binary/report/index.html">cpp_binary</a></li>
+                <li><a href="../rust_vs_cpp/rust_optimal/report/index.html">rust_optimal</a></li>
+            </ul>
+            <li><a href="../word_counting/report/index.html">word_counting</a></li>
+            
+            <ul>
+                <li>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th><a href="../word_counting/cpp_binary/report/index.html">cpp_binary</a></th>
+                            <th><a href="../word_counting/mmap_threads_1_parallel_merge/report/index.html">mmap_threads_1_parallel_merge</a></th>
+                            <th><a href="../word_counting/mmap_threads_1_sequential_merge/report/index.html">mmap_threads_1_sequential_merge</a></th>
+                            <th><a href="../word_counting/mmap_threads_2_parallel_merge/report/index.html">mmap_threads_2_parallel_merge</a></th>
+                            <th><a href="../word_counting/mmap_threads_2_sequential_merge/report/index.html">mmap_threads_2_sequential_merge</a></th>
+                            <th><a href="../word_counting/mmap_threads_4_parallel_merge/report/index.html">mmap_threads_4_parallel_merge</a></th>
+                            <th><a href="../word_counting/mmap_threads_4_sequential_merge/report/index.html">mmap_threads_4_sequential_merge</a></th>
+                            <th><a href="../word_counting/mmap_threads_8_parallel_merge/report/index.html">mmap_threads_8_parallel_merge</a></th>
+                            <th><a href="../word_counting/mmap_threads_8_sequential_merge/report/index.html">mmap_threads_8_sequential_merge</a></th>
+                            <th><a href="../word_counting/read_threads_1_parallel_merge/report/index.html">read_threads_1_parallel_merge</a></th>
+                            <th><a href="../word_counting/read_threads_1_sequential_merge/report/index.html">read_threads_1_sequential_merge</a></th>
+                            <th><a href="../word_counting/read_threads_2_parallel_merge/report/index.html">read_threads_2_parallel_merge</a></th>
+                            <th><a href="../word_counting/read_threads_2_sequential_merge/report/index.html">read_threads_2_sequential_merge</a></th>
+                            <th><a href="../word_counting/read_threads_4_parallel_merge/report/index.html">read_threads_4_parallel_merge</a></th>
+                            <th><a href="../word_counting/read_threads_4_sequential_merge/report/index.html">read_threads_4_sequential_merge</a></th>
+                            <th><a href="../word_counting/read_threads_8_parallel_merge/report/index.html">read_threads_8_parallel_merge</a></th>
+                            <th><a href="../word_counting/read_threads_8_sequential_merge/report/index.html">read_threads_8_sequential_merge</a></th>
+                        </tr>
+                        <tr>
+                            <th><a href="../word_counting/100files_1024bytes/report/index.html">100files_1024bytes</a></th>
+                            <td><a href="../word_counting/cpp_binary/100files_1024bytes/report/index.html">word_counting/cpp_binary/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_parallel_merge/100files_1024bytes/report/index.html">word_counting/mmap_threads_1_parallel_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_sequential_merge/100files_1024bytes/report/index.html">word_counting/mmap_threads_1_sequential_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_parallel_merge/100files_1024bytes/report/index.html">word_counting/mmap_threads_2_parallel_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_sequential_merge/100files_1024bytes/report/index.html">word_counting/mmap_threads_2_sequential_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_parallel_merge/100files_1024bytes/report/index.html">word_counting/mmap_threads_4_parallel_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_sequential_merge/100files_1024bytes/report/index.html">word_counting/mmap_threads_4_sequential_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_parallel_merge/100files_1024bytes/report/index.html">word_counting/mmap_threads_8_parallel_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_sequential_merge/100files_1024bytes/report/index.html">word_counting/mmap_threads_8_sequential_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_parallel_merge/100files_1024bytes/report/index.html">word_counting/read_threads_1_parallel_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_sequential_merge/100files_1024bytes/report/index.html">word_counting/read_threads_1_sequential_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_parallel_merge/100files_1024bytes/report/index.html">word_counting/read_threads_2_parallel_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_sequential_merge/100files_1024bytes/report/index.html">word_counting/read_threads_2_sequential_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_parallel_merge/100files_1024bytes/report/index.html">word_counting/read_threads_4_parallel_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_sequential_merge/100files_1024bytes/report/index.html">word_counting/read_threads_4_sequential_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_parallel_merge/100files_1024bytes/report/index.html">word_counting/read_threads_8_parallel_merge/100files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_sequential_merge/100files_1024bytes/report/index.html">word_counting/read_threads_8_sequential_merge/100files_1024bytes</a></td>
+                        </tr>
+                        <tr>
+                            <th><a href="../word_counting/10files_102400bytes/report/index.html">10files_102400bytes</a></th>
+                            <td><a href="../word_counting/cpp_binary/10files_102400bytes/report/index.html">word_counting/cpp_binary/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_parallel_merge/10files_102400bytes/report/index.html">word_counting/mmap_threads_1_parallel_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_sequential_merge/10files_102400bytes/report/index.html">word_counting/mmap_threads_1_sequential_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_parallel_merge/10files_102400bytes/report/index.html">word_counting/mmap_threads_2_parallel_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_sequential_merge/10files_102400bytes/report/index.html">word_counting/mmap_threads_2_sequential_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_parallel_merge/10files_102400bytes/report/index.html">word_counting/mmap_threads_4_parallel_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_sequential_merge/10files_102400bytes/report/index.html">word_counting/mmap_threads_4_sequential_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_parallel_merge/10files_102400bytes/report/index.html">word_counting/mmap_threads_8_parallel_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_sequential_merge/10files_102400bytes/report/index.html">word_counting/mmap_threads_8_sequential_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_parallel_merge/10files_102400bytes/report/index.html">word_counting/read_threads_1_parallel_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_sequential_merge/10files_102400bytes/report/index.html">word_counting/read_threads_1_sequential_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_parallel_merge/10files_102400bytes/report/index.html">word_counting/read_threads_2_parallel_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_sequential_merge/10files_102400bytes/report/index.html">word_counting/read_threads_2_sequential_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_parallel_merge/10files_102400bytes/report/index.html">word_counting/read_threads_4_parallel_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_sequential_merge/10files_102400bytes/report/index.html">word_counting/read_threads_4_sequential_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_parallel_merge/10files_102400bytes/report/index.html">word_counting/read_threads_8_parallel_merge/10files_102400bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_sequential_merge/10files_102400bytes/report/index.html">word_counting/read_threads_8_sequential_merge/10files_102400bytes</a></td>
+                        </tr>
+                        <tr>
+                            <th><a href="../word_counting/10files_10240bytes/report/index.html">10files_10240bytes</a></th>
+                            <td><a href="../word_counting/cpp_binary/10files_10240bytes/report/index.html">word_counting/cpp_binary/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_parallel_merge/10files_10240bytes/report/index.html">word_counting/mmap_threads_1_parallel_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_sequential_merge/10files_10240bytes/report/index.html">word_counting/mmap_threads_1_sequential_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_parallel_merge/10files_10240bytes/report/index.html">word_counting/mmap_threads_2_parallel_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_sequential_merge/10files_10240bytes/report/index.html">word_counting/mmap_threads_2_sequential_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_parallel_merge/10files_10240bytes/report/index.html">word_counting/mmap_threads_4_parallel_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_sequential_merge/10files_10240bytes/report/index.html">word_counting/mmap_threads_4_sequential_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_parallel_merge/10files_10240bytes/report/index.html">word_counting/mmap_threads_8_parallel_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_sequential_merge/10files_10240bytes/report/index.html">word_counting/mmap_threads_8_sequential_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_parallel_merge/10files_10240bytes/report/index.html">word_counting/read_threads_1_parallel_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_sequential_merge/10files_10240bytes/report/index.html">word_counting/read_threads_1_sequential_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_parallel_merge/10files_10240bytes/report/index.html">word_counting/read_threads_2_parallel_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_sequential_merge/10files_10240bytes/report/index.html">word_counting/read_threads_2_sequential_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_parallel_merge/10files_10240bytes/report/index.html">word_counting/read_threads_4_parallel_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_sequential_merge/10files_10240bytes/report/index.html">word_counting/read_threads_4_sequential_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_parallel_merge/10files_10240bytes/report/index.html">word_counting/read_threads_8_parallel_merge/10files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_sequential_merge/10files_10240bytes/report/index.html">word_counting/read_threads_8_sequential_merge/10files_10240bytes</a></td>
+                        </tr>
+                        <tr>
+                            <th><a href="../word_counting/10files_1024bytes/report/index.html">10files_1024bytes</a></th>
+                            <td><a href="../word_counting/cpp_binary/10files_1024bytes/report/index.html">word_counting/cpp_binary/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_parallel_merge/10files_1024bytes/report/index.html">word_counting/mmap_threads_1_parallel_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_sequential_merge/10files_1024bytes/report/index.html">word_counting/mmap_threads_1_sequential_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_parallel_merge/10files_1024bytes/report/index.html">word_counting/mmap_threads_2_parallel_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_sequential_merge/10files_1024bytes/report/index.html">word_counting/mmap_threads_2_sequential_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_parallel_merge/10files_1024bytes/report/index.html">word_counting/mmap_threads_4_parallel_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_sequential_merge/10files_1024bytes/report/index.html">word_counting/mmap_threads_4_sequential_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_parallel_merge/10files_1024bytes/report/index.html">word_counting/mmap_threads_8_parallel_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_sequential_merge/10files_1024bytes/report/index.html">word_counting/mmap_threads_8_sequential_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_parallel_merge/10files_1024bytes/report/index.html">word_counting/read_threads_1_parallel_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_sequential_merge/10files_1024bytes/report/index.html">word_counting/read_threads_1_sequential_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_parallel_merge/10files_1024bytes/report/index.html">word_counting/read_threads_2_parallel_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_sequential_merge/10files_1024bytes/report/index.html">word_counting/read_threads_2_sequential_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_parallel_merge/10files_1024bytes/report/index.html">word_counting/read_threads_4_parallel_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_sequential_merge/10files_1024bytes/report/index.html">word_counting/read_threads_4_sequential_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_parallel_merge/10files_1024bytes/report/index.html">word_counting/read_threads_8_parallel_merge/10files_1024bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_sequential_merge/10files_1024bytes/report/index.html">word_counting/read_threads_8_sequential_merge/10files_1024bytes</a></td>
+                        </tr>
+                        <tr>
+                            <th><a href="../word_counting/50files_10240bytes/report/index.html">50files_10240bytes</a></th>
+                            <td><a href="../word_counting/cpp_binary/50files_10240bytes/report/index.html">word_counting/cpp_binary/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_parallel_merge/50files_10240bytes/report/index.html">word_counting/mmap_threads_1_parallel_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_1_sequential_merge/50files_10240bytes/report/index.html">word_counting/mmap_threads_1_sequential_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_parallel_merge/50files_10240bytes/report/index.html">word_counting/mmap_threads_2_parallel_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_2_sequential_merge/50files_10240bytes/report/index.html">word_counting/mmap_threads_2_sequential_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_parallel_merge/50files_10240bytes/report/index.html">word_counting/mmap_threads_4_parallel_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_4_sequential_merge/50files_10240bytes/report/index.html">word_counting/mmap_threads_4_sequential_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_parallel_merge/50files_10240bytes/report/index.html">word_counting/mmap_threads_8_parallel_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/mmap_threads_8_sequential_merge/50files_10240bytes/report/index.html">word_counting/mmap_threads_8_sequential_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_parallel_merge/50files_10240bytes/report/index.html">word_counting/read_threads_1_parallel_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_1_sequential_merge/50files_10240bytes/report/index.html">word_counting/read_threads_1_sequential_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_parallel_merge/50files_10240bytes/report/index.html">word_counting/read_threads_2_parallel_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_2_sequential_merge/50files_10240bytes/report/index.html">word_counting/read_threads_2_sequential_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_parallel_merge/50files_10240bytes/report/index.html">word_counting/read_threads_4_parallel_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_4_sequential_merge/50files_10240bytes/report/index.html">word_counting/read_threads_4_sequential_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_parallel_merge/50files_10240bytes/report/index.html">word_counting/read_threads_8_parallel_merge/50files_10240bytes</a></td>
+                            <td><a href="../word_counting/read_threads_8_sequential_merge/50files_10240bytes/report/index.html">word_counting/read_threads_8_sequential_merge/50files_10240bytes</a></td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </ul>
+    </div>
+    <div id="footer">
+        <p>This report was generated by
+            <a href="https://github.com/bheisler/criterion.rs">Criterion.rs</a>, a statistics-driven benchmarking
+            library in Rust.</p>
+    </div>
+</body>
+</html>
