@@ -146,14 +146,11 @@ impl FastWordCounter {
 
             drop(result_tx);
 
-            let mut final_counts = AHashMap::with_capacity(4096);
-            while let Ok(local_counts) = result_rx.recv() {
-                for (word, count) in local_counts {
-                    *final_counts.entry(word).or_insert(0) += count;
-                }
-            }
+            // Collect all results from workers
+            let all_results: Vec<AHashMap<String, u64>> = result_rx.iter().collect();
 
-            final_counts
+            // Merge using parallel or sequential strategy
+            self.merge_results(all_results)
         })
         .unwrap())
     }
@@ -212,7 +209,7 @@ impl FastWordCounter {
 
     // Fallback impl. using regular file reads
     fn count_with_read(&self, files: Vec<PathBuf>) -> Result<AHashMap<String, u64>> {
-        Ok(files
+        let all_results: Vec<AHashMap<String, u64>> = files
             .into_par_iter()
             .map(|file| {
                 let mut local_counts = AHashMap::new();
@@ -228,12 +225,35 @@ impl FastWordCounter {
                 }
                 local_counts
             })
-            .reduce(AHashMap::new, |mut acc, local| {
-                for (word, count) in local {
-                    *acc.entry(word).or_insert(0) += count;
-                }
-                acc
-            }))
+            .collect();
+
+        Ok(self.merge_results(all_results))
+    }
+
+    // Merge multiple hashmaps either sequentially or in parallel
+    fn merge_results(&self, results: Vec<AHashMap<String, u64>>) -> AHashMap<String, u64> {
+        if self.config.parallel_merge && results.len() > 2 {
+            // Use parallel reduction for multiple results
+            results.into_par_iter().reduce(
+                || AHashMap::with_capacity(4096),
+                |mut acc, local| {
+                    for (word, count) in local {
+                        *acc.entry(word).or_insert(0) += count;
+                    }
+                    acc
+                },
+            )
+        } else {
+            // Fall back to sequential merge
+            results
+                .into_iter()
+                .fold(AHashMap::with_capacity(4096), |mut acc, local| {
+                    for (word, count) in local {
+                        *acc.entry(word).or_insert(0) += count;
+                    }
+                    acc
+                })
+        }
     }
 
     // Sort results by count (descending) then alphabetically (ascending)
