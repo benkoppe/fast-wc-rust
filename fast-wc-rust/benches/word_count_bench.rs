@@ -58,7 +58,7 @@ fn bench_word_counting(c: &mut Criterion) {
 
     // Test different file sizes and counts
     let test_cases = [
-        (100, 1024),  // 10 small files (1KB each)
+        (10, 1024),   // 10 small files (1KB each)
         (100, 1024),  // 100 small files
         (10, 10240),  // 10 medium files (10KB each)
         (50, 10240),  // 50 medium files
