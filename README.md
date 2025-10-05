@@ -2,6 +2,30 @@
 
 A high-performance word counting tool for C and header files, implemented in Rust with multiple optimization strategies.
 
+## Comparison Results
+
+With the 80-file test composed in `compare/generate-files/`, which contains about 3.5 million total lines, `hyperfine` provided the following output:
+```bash
+Benchmarking with hyperfine...
+Benchmark 1: /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust ./generated_input/
+  Time (mean ± σ):     243.1 ms ±  19.8 ms    [User: 1670.7 ms, System: 29.5 ms]
+  Range (min … max):   224.4 ms … 284.7 ms    10 runs
+ 
+Benchmark 2: /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc ./generated_input/
+  Time (mean ± σ):      2.673 s ±  0.123 s    [User: 2.635 s, System: 0.038 s]
+  Range (min … max):    2.556 s …  2.888 s    10 runs
+ 
+Summary
+  /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust ./generated_input/ ran
+   10.99 ± 1.03 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc ./generated_input/
+```
+
+With the (less fair) Rust benchmarking code, this output is provided:
+
+<img src="compare/rust-bench/benchmark_comparison.png" alt="Benchmark Comparison" width="700">
+
+These tests were completed on an 8-core, 8GB RAM server container with an Intel(R) Xeon(R) W-2135 CPU @ 3.70GHz.
+
 ## Overview
 
 `fast-wc-rust` is designed to efficiently count words (tokens) in C source files (.c) and header files (.h). It relies on multiple dependencies and implements several performance optimizations including:
