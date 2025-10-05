@@ -15,7 +15,7 @@ fn run_cpp_benchmark(temp_dir: &TempDir, num_threads: usize, parallel_merge: boo
     let mut binding = Command::new(CPP_BINARY);
     let cmd = binding
         .arg(format!("-n{}", num_threads))
-        .arg("-b2")
+        // .arg("-b2")
         .arg("-s");
 
     if parallel_merge {
