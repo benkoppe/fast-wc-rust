@@ -24,9 +24,17 @@ fn run_cpp_benchmark(temp_dir: &TempDir, num_threads: usize, parallel_merge: boo
 
     cmd.arg(temp_dir.path());
 
-    match cmd.output() {
-        Ok(output) => output.status.success(),
-        Err(_) => false,
+    let status = cmd
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
+        .status();
+
+    match status {
+        Ok(status) => status.success(),
+        Err(e) => {
+            eprintln!("Failed to run C++ binary: {e}");
+            false
+        }
     }
 }
 
