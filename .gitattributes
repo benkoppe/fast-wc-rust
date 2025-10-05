@@ -1,2 +1,2 @@
-compare/rust-bench/criterion linguist-vendored
-competitors linguist-vendored
+compare/rust-bench/criterion/** linguist-generated
+competitors/** linguist-vendored
