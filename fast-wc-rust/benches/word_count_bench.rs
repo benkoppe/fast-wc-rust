@@ -121,28 +121,28 @@ fn bench_word_counting(c: &mut Criterion) {
                         },
                     );
                 }
-
-                // Benchmark against C++ binary (if available)
-                if Command::new(CPP_BINARY).arg("--version").output().is_ok() {
-                    group.bench_with_input(
-                        BenchmarkId::new(
-                            "cpp_binary",
-                            format!("{}files_{}bytes", num_files, file_size),
-                        ),
-                        &(num_files, file_size),
-                        |b, _| {
-                            b.iter(|| {
-                                let output = Command::new(CPP_BINARY)
-                                    .arg(temp_dir.path())
-                                    .output()
-                                    .expect("Failed to execute C++ binary");
-
-                                black_box(output.status.success())
-                            })
-                        },
-                    );
-                }
             }
+        }
+
+        // Benchmark against C++ binary (if available)
+        if Command::new(CPP_BINARY).arg("--version").output().is_ok() {
+            group.bench_with_input(
+                BenchmarkId::new(
+                    "cpp_binary",
+                    format!("{}files_{}bytes", num_files, file_size),
+                ),
+                &(num_files, file_size),
+                |b, _| {
+                    b.iter(|| {
+                        let output = Command::new(CPP_BINARY)
+                            .arg(temp_dir.path())
+                            .output()
+                            .expect("Failed to execute C++ binary");
+
+                        black_box(output.status.success())
+                    })
+                },
+            );
         }
 
         // Clean up for next iteration
