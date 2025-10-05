@@ -7,6 +7,7 @@ edition = "2024"
 ahash = "0.8.12"
 anyhow = "1.0.100"
 clap = { version = "4.5.48", features = ["derive"] }
+criterion = "0.7.0"
 crossbeam = "0.8.4"
 memmap2 = "0.9.8"
 num_cpus = "1.17.0"
