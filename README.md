@@ -2,6 +2,20 @@
 
 A high-performance word counting tool for C and header files, implemented in Rust with multiple optimization strategies.
 
+## Table of Contents
+
+- [Comparison Results](#comparison-results)
+- [Overview](#overview)
+- [Features](#features)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Benchmarking](#benchmarking)
+- [Performance Comparison](#performance-comparison)
+- [Project Structure](#project-structure)
+- [Algorithm](#algorithm)
+- [Testing](#testing)
+
 ## Comparison Results
 
 With the 80-file test composed in `compare/generate-files/`, which contains about 3.5 million total lines, `hyperfine` provided the following output:
