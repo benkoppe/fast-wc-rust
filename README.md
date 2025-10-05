@@ -131,5 +131,6 @@ The word counting algorithm:
 ## Testing
 
 ```bash
+cd fast-wc-rust
 cargo test
 ```
