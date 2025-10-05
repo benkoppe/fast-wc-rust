@@ -69,7 +69,7 @@ fn create_test_files(dir: &TempDir, num_files: usize, file_size: usize) -> Vec<S
                     content.push('\n');
                     size += 1;
                 }
-                if size & 50 == 0 {
+                if size % 50 == 0 {
                     content.push_str("();");
                     size += 3;
                 }
