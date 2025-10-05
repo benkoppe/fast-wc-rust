@@ -22,8 +22,12 @@ cargo build --release --manifest-path "$SCRIPT_DIR/../fast-wc-rust/Cargo.toml"
 
 echo
 echo "Benchmarking with hyperfine..."
+
+# Get number of CPU cores for fair comparison
+NCPUS=$(nproc)
+
 hyperfine \
   --warmup 2 \
   --runs 10 \
-  "$SCRIPT_DIR/../fast-wc-rust/target/release/fast-wc-rust $DIR" \
-  "$SCRIPT_DIR/../competitors/fast-cpp/fast-wc $DIR"
+  "$SCRIPT_DIR/../fast-wc-rust/target/release/fast-wc-rust --threads $NCPUS --parallel-merge --silent $DIR" \
+  "taskset 0xFF $SCRIPT_DIR/../competitors/fast-cpp/fast-wc -n$NCPUS -b2 -p -s $DIR"

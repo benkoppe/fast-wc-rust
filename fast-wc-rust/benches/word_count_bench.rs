@@ -8,6 +8,26 @@ use tempfile::TempDir;
 
 const CPP_BINARY: &str = "../competitors/fast-cpp/fast-wc";
 
+fn run_cpp_benchmark(temp_dir: &TempDir, num_threads: usize, parallel_merge: bool) -> bool {
+    let mut cmd = Command::new("taskset");
+    cmd.arg("0xFF")
+        .arg(CPP_BINARY)
+        .arg(format!("-n{}", num_threads))
+        .arg("-b2")
+        .arg("-s");
+    
+    if parallel_merge {
+        cmd.arg("-p");
+    }
+    
+    cmd.arg(temp_dir.path());
+    
+    match cmd.output() {
+        Ok(output) => output.status.success(),
+        Err(_) => false,
+    }
+}
+
 fn create_test_files(dir: &TempDir, num_files: usize, file_size: usize) -> Vec<String> {
     let words = [
         "int", "main", "void", "return", "printf", "char", "const", "struct", "typedef", "static",
@@ -128,30 +148,28 @@ fn bench_word_counting(c: &mut Criterion) {
                             b.iter(|| black_box(counter.count_directory(temp_dir.path()).unwrap()));
                         },
                     );
+
+                    // Benchmark against C++ binary with matching configuration
+                    if Command::new("taskset").arg("--version").output().is_ok() 
+                        && Command::new(CPP_BINARY).arg("--help").output().is_ok() {
+                        group.bench_with_input(
+                            BenchmarkId::new(
+                                format!("cpp_threads_{}_{}", num_threads, merge_suffix),
+                                format!("{}files_{}bytes", num_files, file_size),
+                            ),
+                            &(num_files, file_size),
+                            |b, _| {
+                                b.iter(|| {
+                                    black_box(run_cpp_benchmark(&temp_dir, num_threads, parallel_merge))
+                                })
+                            },
+                        );
+                    }
                 }
             }
         }
 
-        // Benchmark against C++ binary (if available)
-        if Command::new(CPP_BINARY).arg("--version").output().is_ok() {
-            group.bench_with_input(
-                BenchmarkId::new(
-                    "cpp_binary",
-                    format!("{}files_{}bytes", num_files, file_size),
-                ),
-                &(num_files, file_size),
-                |b, _| {
-                    b.iter(|| {
-                        let output = Command::new(CPP_BINARY)
-                            .arg(temp_dir.path())
-                            .output()
-                            .expect("Failed to execute C++ binary");
 
-                        black_box(output.status.success())
-                    })
-                },
-            );
-        }
 
         // Clean up for next iteration
         for entry in fs::read_dir(temp_dir.path()).unwrap() {
@@ -187,17 +205,12 @@ fn bench_rust_vs_cpp(c: &mut Criterion) {
         b.iter(|| black_box(counter.count_directory(temp_dir.path()).unwrap()));
     });
 
-    // Benchmark C++ binary (if available)
-    if Command::new(CPP_BINARY).arg("--help").output().is_ok() {
+    // Benchmark C++ binary with optimal configuration (if available)
+    if Command::new("taskset").arg("--version").output().is_ok() 
+        && Command::new(CPP_BINARY).arg("--help").output().is_ok() {
         group.bench_function("cpp_binary", |b| {
             b.iter(|| {
-                let output = Command::new(CPP_BINARY)
-                    .arg(temp_dir.path())
-                    .arg("--silent") // Assuming your C++ binary has a silent flag
-                    .output()
-                    .expect("Failed to execute C++ binary");
-
-                black_box(output.status.success())
+                black_box(run_cpp_benchmark(&temp_dir, num_cpus::get(), true))
             });
         });
     }
