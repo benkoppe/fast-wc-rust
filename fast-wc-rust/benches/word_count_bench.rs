@@ -188,14 +188,10 @@ fn bench_rust_vs_cpp(c: &mut Criterion) {
     });
 
     // Benchmark C++ binary (if available)
-    if Command::new("./cpp_word_counter")
-        .arg("--help")
-        .output()
-        .is_ok()
-    {
+    if Command::new(CPP_BINARY).arg("--help").output().is_ok() {
         group.bench_function("cpp_binary", |b| {
             b.iter(|| {
-                let output = Command::new("./cpp_word_counter")
+                let output = Command::new(CPP_BINARY)
                     .arg(temp_dir.path())
                     .arg("--silent") // Assuming your C++ binary has a silent flag
                     .output()
