@@ -22,3 +22,6 @@ target
 
 # MacOS
 .DS_Store
+
+# /compare
+generated_input/
