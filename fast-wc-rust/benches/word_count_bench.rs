@@ -9,19 +9,20 @@ use tempfile::TempDir;
 const CPP_BINARY: &str = "../competitors/fast-cpp/fast-wc";
 
 fn run_cpp_benchmark(temp_dir: &TempDir, num_threads: usize, parallel_merge: bool) -> bool {
-    let mut cmd = Command::new("taskset");
-    cmd.arg("0xFF")
-        .arg(CPP_BINARY)
+    // let mut cmd = Command::new("taskset");
+    // cmd.arg("0xFF")
+    // .arg(CPP_BINARY)
+    let mut cmd = Command::new(CPP_BINARY)
         .arg(format!("-n{}", num_threads))
         .arg("-b2")
         .arg("-s");
-    
+
     if parallel_merge {
         cmd.arg("-p");
     }
-    
+
     cmd.arg(temp_dir.path());
-    
+
     match cmd.output() {
         Ok(output) => output.status.success(),
         Err(_) => false,
@@ -150,8 +151,9 @@ fn bench_word_counting(c: &mut Criterion) {
                     );
 
                     // Benchmark against C++ binary with matching configuration
-                    if Command::new("taskset").arg("--version").output().is_ok() 
-                        && Command::new(CPP_BINARY).arg("--help").output().is_ok() {
+                    if Command::new("taskset").arg("--version").output().is_ok()
+                        && Command::new(CPP_BINARY).arg("--help").output().is_ok()
+                    {
                         group.bench_with_input(
                             BenchmarkId::new(
                                 format!("cpp_threads_{}_{}", num_threads, merge_suffix),
@@ -160,7 +162,11 @@ fn bench_word_counting(c: &mut Criterion) {
                             &(num_files, file_size),
                             |b, _| {
                                 b.iter(|| {
-                                    black_box(run_cpp_benchmark(&temp_dir, num_threads, parallel_merge))
+                                    black_box(run_cpp_benchmark(
+                                        &temp_dir,
+                                        num_threads,
+                                        parallel_merge,
+                                    ))
                                 })
                             },
                         );
@@ -168,8 +174,6 @@ fn bench_word_counting(c: &mut Criterion) {
                 }
             }
         }
-
-
 
         // Clean up for next iteration
         for entry in fs::read_dir(temp_dir.path()).unwrap() {
@@ -206,12 +210,11 @@ fn bench_rust_vs_cpp(c: &mut Criterion) {
     });
 
     // Benchmark C++ binary with optimal configuration (if available)
-    if Command::new("taskset").arg("--version").output().is_ok() 
-        && Command::new(CPP_BINARY).arg("--help").output().is_ok() {
+    if Command::new("taskset").arg("--version").output().is_ok()
+        && Command::new(CPP_BINARY).arg("--help").output().is_ok()
+    {
         group.bench_function("cpp_binary", |b| {
-            b.iter(|| {
-                black_box(run_cpp_benchmark(&temp_dir, num_cpus::get(), true))
-            });
+            b.iter(|| black_box(run_cpp_benchmark(&temp_dir, num_cpus::get(), true)));
         });
     }
 
