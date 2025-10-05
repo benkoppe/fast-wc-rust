@@ -188,22 +188,21 @@ impl FastWordCounter {
                     word_start = Some(i);
                 }
             } else if let Some(start) = word_start {
-                if let Ok(word) = std::str::from_utf8(&data[start..i]) {
-                    if !word.is_empty() {
-                        *counts.entry(word.to_string()).or_insert(0) += 1;
-                    }
+                if let Ok(word) = std::str::from_utf8(&data[start..i])
+                    && !word.is_empty()
+                {
+                    *counts.entry(word.to_string()).or_insert(0) += 1;
                 }
                 word_start = None;
             }
         }
 
         // End of file
-        if let Some(start) = word_start {
-            if let Ok(word) = std::str::from_utf8(&data[start..]) {
-                if !word.is_empty() {
-                    *counts.entry(word.to_string()).or_insert(0) += 1;
-                }
-            }
+        if let Some(start) = word_start
+            && let Ok(word) = std::str::from_utf8(&data[start..])
+            && !word.is_empty()
+        {
+            *counts.entry(word.to_string()).or_insert(0) += 1;
         }
     }
 
