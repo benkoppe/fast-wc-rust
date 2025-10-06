@@ -8,36 +8,39 @@ use tempfile::TempDir;
 
 const CPP_BINARY: &str = "../competitors/fast-cpp/fast-wc";
 
-fn run_cpp_benchmark(temp_dir: &TempDir, num_threads: usize, parallel_merge: bool) -> bool {
-    // let mut cmd = Command::new("taskset");
-    // cmd.arg("0xFF")
-    // .arg(CPP_BINARY)
-    let mut binding = Command::new(CPP_BINARY);
-    let cmd = binding
-        .arg(format!("-n{}", num_threads))
-        .arg("-b2")
-        .arg("-s");
-
-    if parallel_merge {
-        cmd.arg("-p");
-    }
-
-    cmd.arg(temp_dir.path());
-
-    let status = cmd
-        .stdin(std::process::Stdio::null())
-        .stdout(std::process::Stdio::null())
-        .stderr(std::process::Stdio::null())
-        .status();
-
-    match status {
-        Ok(status) => status.success(),
-        Err(e) => {
-            eprintln!("Failed to run C++ binary: {e}");
-            false
-        }
-    }
-}
+// fn run_cpp_benchmark(temp_dir: &TempDir, num_threads: usize, parallel_merge: bool) -> bool {
+//     // DISABLED: Current breaks, for some reason, when threads >= 4
+//     // not a fair test anyways, disabling and using hyperfine instead
+//
+//     // let mut cmd = Command::new("taskset");
+//     // cmd.arg("0xFF")
+//     // .arg(CPP_BINARY)
+//     let mut binding = Command::new(CPP_BINARY);
+//     let cmd = binding
+//         .arg(format!("-n{}", num_threads))
+//         .arg("-b2")
+//         .arg("-s");
+//
+//     if parallel_merge {
+//         cmd.arg("-p");
+//     }
+//
+//     cmd.arg(temp_dir.path());
+//
+//     let status = cmd
+//         .stdin(std::process::Stdio::null())
+//         .stdout(std::process::Stdio::null())
+//         .stderr(std::process::Stdio::null())
+//         .status();
+//
+//     match status {
+//         Ok(status) => status.success(),
+//         Err(e) => {
+//             eprintln!("Failed to run C++ binary: {e}");
+//             false
+//         }
+//     }
+// }
 
 fn create_test_files(dir: &TempDir, num_files: usize, file_size: usize) -> Vec<String> {
     let words = [
@@ -162,20 +165,20 @@ fn bench_word_counting(c: &mut Criterion) {
                 }
 
                 // Benchmark against C++ binary with matching configuration
-                if Command::new("taskset").arg("--version").output().is_ok()
-                    && Command::new(CPP_BINARY).arg("--help").output().is_ok()
-                {
-                    group.bench_with_input(
-                        BenchmarkId::new(
-                            format!("cpp_threads_{}_{}", num_threads, "sequential_merge"),
-                            format!("{}files_{}bytes", num_files, file_size),
-                        ),
-                        &(num_files, file_size),
-                        |b, _| {
-                            b.iter(|| black_box(run_cpp_benchmark(&temp_dir, num_threads, false)))
-                        },
-                    );
-                }
+                // if Command::new("taskset").arg("--version").output().is_ok()
+                //     && Command::new(CPP_BINARY).arg("--help").output().is_ok()
+                // {
+                //     group.bench_with_input(
+                //         BenchmarkId::new(
+                //             format!("cpp_threads_{}_{}", num_threads, "sequential_merge"),
+                //             format!("{}files_{}bytes", num_files, file_size),
+                //         ),
+                //         &(num_files, file_size),
+                //         |b, _| {
+                //             b.iter(|| black_box(run_cpp_benchmark(&temp_dir, num_threads, false)))
+                //         },
+                //     );
+                // }
             }
         }
 
@@ -214,13 +217,13 @@ fn bench_rust_vs_cpp(c: &mut Criterion) {
     });
 
     // Benchmark C++ binary with optimal configuration (if available)
-    if Command::new("taskset").arg("--version").output().is_ok()
-        && Command::new(CPP_BINARY).arg("--help").output().is_ok()
-    {
-        group.bench_function("cpp_binary", |b| {
-            b.iter(|| black_box(run_cpp_benchmark(&temp_dir, num_cpus::get(), true)));
-        });
-    }
+    // if Command::new("taskset").arg("--version").output().is_ok()
+    //     && Command::new(CPP_BINARY).arg("--help").output().is_ok()
+    // {
+    //     group.bench_function("cpp_binary", |b| {
+    //         b.iter(|| black_box(run_cpp_benchmark(&temp_dir, num_cpus::get(), true)));
+    //     });
+    // }
 
     group.finish();
 }
