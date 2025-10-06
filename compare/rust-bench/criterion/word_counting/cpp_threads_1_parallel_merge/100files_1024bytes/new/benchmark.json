@@ -1,0 +1,1 @@
+{"group_id":"word_counting","function_id":"cpp_threads_1_parallel_merge","value_str":"100files_1024bytes","throughput":{"Bytes":102400},"full_id":"word_counting/cpp_threads_1_parallel_merge/100files_1024bytes","directory_name":"word_counting/cpp_threads_1_parallel_merge/100files_1024bytes","title":"word_counting/cpp_threads_1_parallel_merge/100files_1024bytes"}
