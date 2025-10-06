@@ -1,6 +1,7 @@
 import random
 import os
 import argparse
+import shutil
 
 # Common C/C++ keywords and identifiers
 keywords = [
@@ -282,7 +283,12 @@ args = parser.parse_args()
 
 # Generate large files
 FOLDER_NAME = "generated_input"
-os.makedirs(FOLDER_NAME, exist_ok=True)
+
+# Clear out existing folder if it exists
+if os.path.exists(FOLDER_NAME):
+    shutil.rmtree(FOLDER_NAME)
+
+os.makedirs(FOLDER_NAME)
 
 total_lines = 0
 total_size = 0
