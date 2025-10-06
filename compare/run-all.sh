@@ -29,5 +29,8 @@ NCPUS=$(nproc)
 hyperfine \
   --warmup 2 \
   --runs 10 \
-  "$SCRIPT_DIR/../fast-wc-rust/target/release/fast-wc-rust --threads $NCPUS --parallel-merge --silent $DIR" \
-  "$SCRIPT_DIR/../competitors/fast-cpp/fast-wc -n$NCPUS -b2 -p -s $DIR"
+  --parameter-list threads ${NCPUS} \
+  --parameter-list blocks 1,2,4,8 \
+  --parameter-list parallel "-p," \
+  "$SCRIPT_DIR/../fast-wc-rust/target/release/fast-wc-rust --threads {threads} {parallel} --silent $DIR" \
+  "$SCRIPT_DIR/../competitors/fast-cpp/fast-wc -n{threads} -b{blocks} {parallel} -s $DIR"
