@@ -66,6 +66,8 @@ Summary
 
 These tests were completed on an 8-core, 32GB RAM (1GB SWAP) server container with an Intel(R) Xeon(R) W-2135 CPU @ 3.70GHz.
 
+`taskset` wasn't used in these tests, because it only appeared to provide similar slowdown to both the Rust and C++ implementations with no benefit.
+
 ## Benchmark Results
 
 The benchmark code has been modified to now only test different Rust configurations. Results of the `criterion.rs` report are hosted with a GitHub action here:
