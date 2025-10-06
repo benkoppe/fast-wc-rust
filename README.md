@@ -74,6 +74,8 @@ The benchmark code has been modified to now only test different Rust configurati
 
 https://benkoppe.github.io/fast-wc-rust/report/
 
+The `rust_vs_cpp` part of this report is invalid and can be disregarded.
+
 ## Overview
 
 `fast-wc-rust` is designed to efficiently count words (tokens) in C source files (.c) and header files (.h). It relies on multiple dependencies and implements several performance optimizations including:
