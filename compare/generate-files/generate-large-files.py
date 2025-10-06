@@ -1,5 +1,6 @@
 import random
 import os
+import argparse
 
 # Common C/C++ keywords and identifiers
 keywords = [
@@ -261,12 +262,30 @@ def generate_h_content(lines):
     return "\n".join(content)
 
 
+# Parse command line arguments
+parser = argparse.ArgumentParser(description="Generate large C/C++ files for testing")
+parser.add_argument(
+    "-c",
+    "--c-files",
+    type=int,
+    default=50,
+    help="Number of .c files to generate (default: 50)",
+)
+parser.add_argument(
+    "-H",
+    "--h-files",
+    type=int,
+    default=30,
+    help="Number of .h files to generate (default: 30)",
+)
+args = parser.parse_args()
+
 # Generate large files
 FOLDER_NAME = "generated_input"
 os.makedirs(FOLDER_NAME, exist_ok=True)
 
 # Create multiple large .c files (50K-100K lines each)
-for i in range(50):
+for i in range(args.c_files):
     lines = random.randint(50000, 100000)
     filename = f"{FOLDER_NAME}/large_file_{i+1}.c"
     print(f"Generating {filename} with {lines} lines...")
@@ -274,7 +293,7 @@ for i in range(50):
         f.write(generate_c_content(lines))
 
 # Create multiple large .h files (20K-50K lines each)
-for i in range(30):
+for i in range(args.h_files):
     lines = random.randint(20000, 50000)
     filename = f"{FOLDER_NAME}/large_header_{i+1}.h"
     print(f"Generating {filename} with {lines} lines...")
