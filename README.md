@@ -18,27 +18,53 @@ A high-performance word counting tool for C and header files, implemented in Rus
 
 ## Comparison Results
 
-With the 80-file test composed in `compare/generate-files/`, which contains about 3.5 million total lines, `hyperfine` provided the following output:
+I wasn't sure where I could find the original benchmark used for the slide. These bechmarks are instead composed with a python script that generates many large dummy ".c" and ".h" files, found in `compare/generate-files/`.
+
+Here are some (trimmed) results of the `hyperfine` benchmarking output:
+
+With 80 files, 4,738,771 total lines, total size 171.63 MB (0.168 GB):
 ```bash
 Benchmarking with hyperfine...
-Benchmark 1: /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust ./generated_input/
-  Time (mean ± σ):     243.1 ms ±  19.8 ms    [User: 1670.7 ms, System: 29.5 ms]
-  Range (min … max):   224.4 ms … 284.7 ms    10 runs
- 
-Benchmark 2: /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc ./generated_input/
-  Time (mean ± σ):      2.673 s ±  0.123 s    [User: 2.635 s, System: 0.038 s]
-  Range (min … max):    2.556 s …  2.888 s    10 runs
- 
 Summary
-  /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust ./generated_input/ ran
-   10.99 ± 1.03 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc ./generated_input/
+  /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust --threads 8 -p --silent ./generated_input/ ran
+    1.01 ± 0.04 times faster than /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust --threads 8 --silent ./generated_input/
+    2.01 ± 0.08 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b4 -s ./generated_input/
+    2.09 ± 0.07 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b2 -p -s ./generated_input/
+    2.13 ± 0.16 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b8 -s ./generated_input/
+    2.14 ± 0.14 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b4 -p -s ./generated_input/
+    2.15 ± 0.14 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b2 -s ./generated_input/
+    2.15 ± 0.17 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b8 -p -s ./generated_input/
+    2.20 ± 0.09 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b1 -s ./generated_input/
+    2.31 ± 0.17 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b1 -p -s ./generated_input/
 ```
 
-With the (less fair) Rust benchmarking code, this output is provided:
+With 1 file, 94,778 total lines, total size 3.37 MB (0.003 GB):
+```bash
+Benchmarking with hyperfine...
+Summary
+  /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust --threads 8  --silent ./generated_input/ ran
+    1.12 ± 0.35 times faster than /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust --threads 8 -p --silent ./generated_input/
+    1.78 ± 0.52 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8  -s ./generated_input/
+    1.84 ± 0.54 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -p -s ./generated_input/
+```
 
-<img src="compare/rust-bench/benchmark_comparison.png" alt="Benchmark Comparison" width="700">
+With 320 files, 19,551,563 total lines, total size 708.37 MB (0.692 GB):
+```bash
+Benchmarking with hyperfine...
+Summary
+  /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust --threads 8 -p --silent ./generated_input/ ran
+    1.00 ± 0.05 times faster than /root/fast-wc-rust/compare/../fast-wc-rust/target/release/fast-wc-rust --threads 8 --silent ./generated_input/
+    2.04 ± 0.12 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b8 -s ./generated_input/
+    2.04 ± 0.11 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b8 -p -s ./generated_input/
+    2.06 ± 0.09 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b4 -p -s ./generated_input/
+    2.10 ± 0.14 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b4 -s ./generated_input/
+    2.11 ± 0.10 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b2 -p -s ./generated_input/
+    2.12 ± 0.11 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b2 -s ./generated_input/
+    2.23 ± 0.13 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b1 -s ./generated_input/
+    2.23 ± 0.12 times faster than /root/fast-wc-rust/compare/../competitors/fast-cpp/fast-wc -n8 -b1 -p -s ./generated_input/
+```
 
-These tests were completed on an 8-core, 8GB RAM server container with an Intel(R) Xeon(R) W-2135 CPU @ 3.70GHz.
+These tests were completed on an 8-core, 32GB RAM (1GB SWAP) server container with an Intel(R) Xeon(R) W-2135 CPU @ 3.70GHz.
 
 ## Overview
 
