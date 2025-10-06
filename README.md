@@ -1,6 +1,6 @@
 # fast-wc-rust
 
-A high-performance word counting tool for C and header files, implemented in Rust with multiple optimization strategies.
+A high-performance word counting tool for C and header files, implemented in Rust with multiple optimization strategies. Relies on multiple dependencies.
 
 ## Table of Contents
 
