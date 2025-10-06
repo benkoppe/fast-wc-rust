@@ -25,6 +25,7 @@ fn run_cpp_benchmark(temp_dir: &TempDir, num_threads: usize, parallel_merge: boo
     cmd.arg(temp_dir.path());
 
     let status = cmd
+        .stdin(std::process::Stdio::null())
         .stdout(std::process::Stdio::null())
         .stderr(std::process::Stdio::null())
         .status();
