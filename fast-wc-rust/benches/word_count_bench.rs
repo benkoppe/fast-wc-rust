@@ -15,7 +15,7 @@ fn run_cpp_benchmark(temp_dir: &TempDir, num_threads: usize, parallel_merge: boo
     let mut binding = Command::new(CPP_BINARY);
     let cmd = binding
         .arg(format!("-n{}", num_threads))
-        // .arg("-b2")
+        .arg("-b2")
         .arg("-s");
 
     if parallel_merge {
@@ -158,28 +158,22 @@ fn bench_word_counting(c: &mut Criterion) {
                             b.iter(|| black_box(counter.count_directory(temp_dir.path()).unwrap()));
                         },
                     );
+                }
 
-                    // Benchmark against C++ binary with matching configuration
-                    if Command::new("taskset").arg("--version").output().is_ok()
-                        && Command::new(CPP_BINARY).arg("--help").output().is_ok()
-                    {
-                        group.bench_with_input(
-                            BenchmarkId::new(
-                                format!("cpp_threads_{}_{}", num_threads, merge_suffix),
-                                format!("{}files_{}bytes", num_files, file_size),
-                            ),
-                            &(num_files, file_size),
-                            |b, _| {
-                                b.iter(|| {
-                                    black_box(run_cpp_benchmark(
-                                        &temp_dir,
-                                        num_threads,
-                                        parallel_merge,
-                                    ))
-                                })
-                            },
-                        );
-                    }
+                // Benchmark against C++ binary with matching configuration
+                if Command::new("taskset").arg("--version").output().is_ok()
+                    && Command::new(CPP_BINARY).arg("--help").output().is_ok()
+                {
+                    group.bench_with_input(
+                        BenchmarkId::new(
+                            format!("cpp_threads_{}_{}", num_threads, "sequential_merge"),
+                            format!("{}files_{}bytes", num_files, file_size),
+                        ),
+                        &(num_files, file_size),
+                        |b, _| {
+                            b.iter(|| black_box(run_cpp_benchmark(&temp_dir, num_threads, false)))
+                        },
+                    );
                 }
             }
         }
