@@ -66,6 +66,12 @@ Summary
 
 These tests were completed on an 8-core, 32GB RAM (1GB SWAP) server container with an Intel(R) Xeon(R) W-2135 CPU @ 3.70GHz.
 
+## Benchmark Results
+
+The benchmark code has been modified to now only test different Rust configurations. Results of the `criterion.rs` report are hosted with a GitHub action here:
+
+https://benkoppe.github.io/fast-wc-rust/report/
+
 ## Overview
 
 `fast-wc-rust` is designed to efficiently count words (tokens) in C source files (.c) and header files (.h). It relies on multiple dependencies and implements several performance optimizations including:
