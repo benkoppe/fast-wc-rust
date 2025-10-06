@@ -284,20 +284,39 @@ args = parser.parse_args()
 FOLDER_NAME = "generated_input"
 os.makedirs(FOLDER_NAME, exist_ok=True)
 
+total_lines = 0
+total_size = 0
+total_files = 0
+
 # Create multiple large .c files (50K-100K lines each)
 for i in range(args.c_files):
     lines = random.randint(50000, 100000)
     filename = f"{FOLDER_NAME}/large_file_{i+1}.c"
     print(f"Generating {filename} with {lines} lines...")
+    content = generate_c_content(lines)
     with open(filename, "w") as f:
-        f.write(generate_c_content(lines))
+        f.write(content)
+
+    file_size = os.path.getsize(filename)
+    total_lines += lines
+    total_size += file_size
+    total_files += 1
 
 # Create multiple large .h files (20K-50K lines each)
 for i in range(args.h_files):
     lines = random.randint(20000, 50000)
     filename = f"{FOLDER_NAME}/large_header_{i+1}.h"
     print(f"Generating {filename} with {lines} lines...")
+    content = generate_h_content(lines)
     with open(filename, "w") as f:
-        f.write(generate_h_content(lines))
+        f.write(content)
+
+    file_size = os.path.getsize(filename)
+    total_lines += lines
+    total_size += file_size
+    total_files += 1
 
 print("Done generating large test files!")
+print(
+    f"Summary: {total_files} files, {total_lines:,} total lines, {total_size / (1024*1024):.2f} MB ({total_size / (1024*1024*1024):.3f} GB) total size"
+)
