@@ -25,3 +25,5 @@ target
 
 # /compare
 generated_input/
+linux-5.8-rc7.tar.gz
+linux-5.8-rc7/
