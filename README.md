@@ -26,7 +26,7 @@ With 80 files, 4,738,771 total lines, total size 171.63 MB (0.168 GB):
 ```bash
 Benchmarking with hyperfine...
 Summary
-  fast-wc-rust --threads 8 -p --silent ./generated_input/ ran
+  fast-wc-rust --threads 8 -p --silent ./generated_input/ (~410 ms) ran
     1.01 ± 0.04 times faster than fast-wc-rust --threads 8 --silent ./generated_input/
     2.01 ± 0.08 times faster than fast-wc -n8 -b4 -s ./generated_input/
     2.09 ± 0.07 times faster than fast-wc -n8 -b2 -p -s ./generated_input/
@@ -42,7 +42,7 @@ With 1 file, 94,778 total lines, total size 3.37 MB (0.003 GB):
 ```bash
 Benchmarking with hyperfine...
 Summary
-  fast-wc-rust --threads 8  --silent ./generated_input/ ran
+  fast-wc-rust --threads 8  --silent ./generated_input/ (~28 ms) ran
     1.12 ± 0.35 times faster than fast-wc-rust --threads 8 -p --silent ./generated_input/
     1.78 ± 0.52 times faster than fast-wc -n8  -s ./generated_input/
     1.84 ± 0.54 times faster than fast-wc -n8 -p -s ./generated_input/
@@ -52,7 +52,7 @@ With 320 files, 19,551,563 total lines, total size 708.37 MB (0.692 GB):
 ```bash
 Benchmarking with hyperfine...
 Summary
-  fast-wc-rust --threads 8 -p --silent ./generated_input/ ran
+  fast-wc-rust --threads 8 -p --silent ./generated_input/ (~1.6 s) ran
     1.00 ± 0.05 times faster than fast-wc-rust --threads 8 --silent ./generated_input/
     2.04 ± 0.12 times faster than fast-wc -n8 -b8 -s ./generated_input/
     2.04 ± 0.11 times faster than fast-wc -n8 -b8 -p -s ./generated_input/
